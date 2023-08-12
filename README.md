@@ -23,12 +23,14 @@
 
 ## Instructions
 
-### Fetch
+Every instruction is decomposed into 5 micro instructions.
 
-Every instruction starts with the same two instructions to fetch instruction and increment program counter:
+The first two micro instructions are always the same. They fetch + load instruction from the memory address pointed by the program counter and increment the program counter.
 
 0. `MI` + `CO`
 1. `RO` + `II` + `CE`
+
+After that, the loaded instruction's specific micro instructions are run.
 
 ### LDA (0001)
 
@@ -79,4 +81,15 @@ Use the `W` command and send the file using xmodem:
 ```
 Press CTRL+a
 :exec !! lsx -b -X /path/to/instruction_register_x.bin
+```
+
+## Test program
+
+```
+0000: 0001 1110 - LDA 1110
+0001: 0010 1111 - ADD 1111
+0010: 1110 0000 - OUT
+0011: 1111 0000 - HLT
+1110: 0001 1100 - 28
+1111: 0000 1110 - 14
 ```
